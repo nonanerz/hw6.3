@@ -11,10 +11,10 @@ function perform() {
     }
 
     var res = callback.apply(null, args)
-
-    return new Promise(function (resolve) {
-        resolve(res, callback)
-    });
+    this.then = function (callback) {
+        return perform(res, callback)
+    }
+    return this
 }
 
 perform(null, function() {
